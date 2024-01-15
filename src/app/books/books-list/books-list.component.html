@@ -1,0 +1,20 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">BookCode</th>
+        <th scope="col">Name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Image</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let list of booksList;let i = index;trackBy:trackBy">
+        <th scope="row">{{i+1}}</th>
+        <td>{{list?.bookCode}}</td>
+        <td>{{list?.bookName}}</td>
+        <td>{{list?.quantity}} Unit</td>
+        <td><img style="height: 40px;width: 40px;" src="{{list?.bookImage?.url}}" alt="book"/></td>
+      </tr>
+    </tbody>
+  </table>
