@@ -13,7 +13,6 @@ export class ProductsComponent {
   firestore: Firestore = inject(Firestore);
   productList:Product[]=[];
   prodObj: Product = {
-    id: '',
     Name: '',
     Description: '',
     Image: '',
@@ -53,13 +52,13 @@ export class ProductsComponent {
       return;
     }
 
-    this.prodObj.id = '';
     this.prodObj.Image = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fdefault-image&psig=AOvVaw2_Gxeq31biXlwJD9uzjTki&ust=1705923933430000&source=images&cd=vfe&ved=0CBMQjRxqFwoTCPiXvIO07oMDFQAAAAAdAAAAABAJ';
     this.prodObj.Name = this.name;
     this.prodObj.Description = this.description;
     this.prodObj.Mobile = this.mobile;
 
-
+    this.data.addProduct(this.prodObj);
+    this.resetForm();
   }
   
 
@@ -67,7 +66,6 @@ export class ProductsComponent {
 
 
 export interface Product {
-  id : string,
   Name : string,
   Description : string,
   Image : string,
