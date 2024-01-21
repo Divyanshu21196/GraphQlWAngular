@@ -1,1 +1,35 @@
-<p>products works!</p>
+<div class="container-fluid">
+    <a [routerLink]="['/book']">--Back</a>
+    <div class="row">
+        <div class="col-md-4 mt-5">
+            <div class="card border-0 shadow p-3">
+                <div class="form-floating mb-3 tetx-center">
+                    <h5 class="text-center text-warning">Add Brand</h5>
+                </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="firstName" name="firstname" [(ngModel)]="name">
+                        <label for="firstname">Brand name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="description">
+                        <label for="lastName">Brand Description</label>
+                    </div>
+                    
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="mobile" name="mobile" [(ngModel)]="mobile">
+                        <label for="mobile">Mobile</label>
+                    </div>
+                    <button type="button" class="btn btn-outline-success" (click)="addProduct()">Add Brand</button>
+            </div>
+        </div>
+        <div class="col-md-8 mt-2">
+            <h5 class="text-danger"> Brand List</h5>
+            <div class="card p-3 shadow">
+                <div class="card-body">
+                    <app-product-list [productList]="productList"></app-product-list>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -3,20 +3,22 @@ import { CommonModule } from '@angular/common';
 
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './products.component';
-import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
-import { environment } from '../shared/constants';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { ProductListComponent } from './product-list/product-list.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
   declarations: [
-    ProductsComponent
+    ProductsComponent,
+    ProductListComponent
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     ProductsRoutingModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideFirestore(() => getFirestore()),
+    SharedModule
   ]
 })
 export class ProductsModule { }

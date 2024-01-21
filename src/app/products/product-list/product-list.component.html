@@ -1,0 +1,18 @@
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Image</th>
+        <th scope="col">Mobile</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of productList">
+        <td >{{product.Name}}</td>
+        <td>{{product.Description}}</td>
+        <td><img style="height: 40px;" src="{{product?.Image}}"  alt="{{product?.Name}}"/></td>
+        <td>{{product.Mobile}}</td>
+      </tr>
+    </tbody>
+</table>

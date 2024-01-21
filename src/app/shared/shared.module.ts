@@ -4,7 +4,10 @@ import { GraphQlModule } from '../graph-ql/graph-ql.module';
 import { ApolloModule } from 'apollo-angular';    // <--- this
 import { HttpClientModule } from '@angular/common/http';
 import { AppNoListing } from './component/Ui/no-listing-component';
-
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from './constants';
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 
 @NgModule({
@@ -15,7 +18,9 @@ import { AppNoListing } from './component/Ui/no-listing-component';
     ApolloModule,
     HttpClientModule,
     CommonModule,
-    GraphQlModule
+    GraphQlModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
   ],
   exports:[
     AppNoListing
