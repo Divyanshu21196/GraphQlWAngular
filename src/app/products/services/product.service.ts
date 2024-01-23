@@ -1,7 +1,8 @@
 import { Injectable,inject } from '@angular/core';
 import { Firestore, collectionData, collection } from '@angular/fire/firestore';
-import {setDoc,getFirestore,doc} from "firebase/firestore";
-import { Product } from '../products.component';
+import {setDoc,doc} from "firebase/firestore";
+import { Brands } from 'src/app/modals/Brands';
+import { FIREBASE_COLLECTION_NAME } from 'src/app/shared/constants';
 
 
 @Injectable({
@@ -9,14 +10,11 @@ import { Product } from '../products.component';
 })
 export class ProductService {
   firestore: Firestore = inject(Firestore);
-  dbRef:any = collection(this.firestore, "Products");
-
-
+  dbRef:any = collection(this.firestore, FIREBASE_COLLECTION_NAME);
 
   constructor() { }
 
-
-   makeid(length=5) {
+   makeid(length=5):string{
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const charactersLength = characters.length;
@@ -29,7 +27,7 @@ export class ProductService {
 }
 
 
-  addProduct(product : Product) {
+  addProduct(product : Brands):void {
 
     const _id = this.makeid();
 

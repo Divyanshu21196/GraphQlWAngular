@@ -1,7 +1,9 @@
 import { Component,inject  } from '@angular/core';
-import { Firestore, collectionData, collection } from '@angular/fire/firestore';
+import { Firestore} from '@angular/fire/firestore';
 import { ProductService } from './services/product.service';
-
+import { Title, Meta } from '@angular/platform-browser';
+import { Brands } from '../modals/Brands';
+import { DEFAULT_IMG_LOGO, REQUIRED_FIELD_VALIDATION } from '../shared/constants';
 
 @Component({
   selector: 'app-products',
@@ -11,8 +13,8 @@ import { ProductService } from './services/product.service';
 export class ProductsComponent {
 
   firestore: Firestore = inject(Firestore);
-  productList:Product[]=[];
-  prodObj: Product = {
+  productList:Brands[]=[];
+  prodObj: Brands = {
     Name: '',
     Description: '',
     Image: '',
@@ -24,20 +26,39 @@ export class ProductsComponent {
   img: string = '';
   mobile: string = '';
 
-  constructor(private data:ProductService){
+  constructor(
+    private data:ProductService,
+    private titleService: Title,
+    private metaService: Meta
+    ){
     this.getAllStudents()
   }
 
-  ngOnInit():void{
-  }
-
-
-  getAllStudents() {
+  getAllStudents():void{
     const item$:any  =  this.data.getAllProducts();
-    item$.subscribe((res:any)=>{this.productList=[...res]})
+    item$.subscribe((res:any)=>{
+      this.productList=[...res];
+      this.saveMetaData()
+    })
   }
 
-  resetForm() {
+
+  saveMetaData():void{
+
+    if(this.productList.length){
+      (this.productList || []).map((e:Brands)=>{
+        this.addMetaTagToPage(e);
+      })
+    }
+
+  }
+
+  addMetaTagToPage(brandMeta:Brands):void{
+    this.metaService.addTag({ name: brandMeta.Name, content: brandMeta.Description });
+    this.metaService.addTag({ property: 'og:image', content: brandMeta.Image })
+  }
+
+  resetForm():void{
     this.id = '';
     this.name = '';
     this.description = '';
@@ -48,11 +69,11 @@ export class ProductsComponent {
   addProduct():void{
 
    if (this.name == '' || this.description == '' || this.mobile == '') {
-      alert('Fill all input fields');
+      alert(REQUIRED_FIELD_VALIDATION);
       return;
     }
 
-    this.prodObj.Image = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fdefault-image&psig=AOvVaw2_Gxeq31biXlwJD9uzjTki&ust=1705923933430000&source=images&cd=vfe&ved=0CBMQjRxqFwoTCPiXvIO07oMDFQAAAAAdAAAAABAJ';
+    this.prodObj.Image = DEFAULT_IMG_LOGO;
     this.prodObj.Name = this.name;
     this.prodObj.Description = this.description;
     this.prodObj.Mobile = this.mobile;
@@ -62,12 +83,4 @@ export class ProductsComponent {
   }
   
 
-}
-
-
-export interface Product {
-  Name : string,
-  Description : string,
-  Image : string,
-  Mobile : string
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 
 @Component({
@@ -12,9 +12,6 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 })
 
 
-export class AppNoListing implements OnInit {
+export class AppNoListing  {
     constructor() { }
-    ngOnInit(): void {
-    }
-
 }

@@ -1,6 +1,5 @@
 import { Component,Input } from '@angular/core';
-import { BooksSchema } from '../books.component';
-
+import { BooksSchema } from 'src/app/modals/Books';
 @Component({
   selector: 'app-books-list',
   templateUrl: './books-list.component.html',
@@ -12,8 +11,6 @@ export class BooksListComponent {
 
   
   constructor(){}
-
-  ngOnInit():void{}
 
   trackBy(index:number, item:any){
     return item; 

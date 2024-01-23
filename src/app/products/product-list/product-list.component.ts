@@ -1,6 +1,5 @@
 import { Component,Input } from '@angular/core';
-import { Product } from '../products.component';
-
+import { Brands } from 'src/app/modals/Brands';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -8,7 +7,7 @@ import { Product } from '../products.component';
 })
 export class ProductListComponent {
 
-  @Input() productList:Array<any>=[];
+  @Input() productList:Array<Brands>=[];
 
   constructor(){}
 
